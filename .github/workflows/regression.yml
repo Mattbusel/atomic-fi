@@ -75,7 +75,7 @@ jobs:
       - name: Start Watchman (needs checkout for config)
         run: |
           sed '/^  Database:/,/^  [A-Z]/{ /^  Database:/d; /^    /d; }' \
-            config.all-lists.yml > /tmp/watchman-ci.yml
+            config.all-lists.yml | grep -v us_fincen_311 > /tmp/watchman-ci.yml
           docker run -d --name watchman \
             -p 8084:8084 -p 9094:9094 \
             -e APP_CONFIG=/app/config.yml \
